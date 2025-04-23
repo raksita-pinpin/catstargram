@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { useCatPosts } from "./api/useCatPosts";
 import Navbar from "@/components/navbar";
@@ -10,23 +9,25 @@ export default function Home() {
 
   if (loading) return <p>กำลังโหลดโพสต์แมว...</p>;
   if (error) return <p>เกิดข้อผิดพลาด: {error}</p>;
-  
 
   return (
     <DefaultLayout>
-      <PopularCat/>
+      <PopularCat />
+
       <div className="p-4">
         <h1 className="text-2xl font-bold mb-4">Recent Posts</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[24px]">
           {posts.map((post) => (
-            <div key={post.id} className="bg-white rounded shadow-md overflow-hidden">
-              <Image
-                src={post.image}
-                alt={post.caption}
-                width={500}
-                height={500}
-                className="w-full h-auto object-cover"
-              />
+            <div key={post.id} className="bg-white rounded shadow-md overflow-hidden w-full">
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}> {/* 16:9 aspect ratio */}
+                <Image
+                  src={post.image}
+                  alt={post.caption}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-t"
+                />
+              </div>
               <div className="p-2">
                 <div className="flex items-center gap-2">
                   <Image
