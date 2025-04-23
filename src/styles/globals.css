@@ -133,3 +133,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+.swiper-slide-active .card-wrapper {
+  transform: scale(1.1); /* ขยายขนาดขึ้น 10% */
+  z-index: 10; /* ซ้อนอยู่ด้านบนสุด */
+}
+

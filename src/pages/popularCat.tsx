@@ -7,9 +7,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
+
+
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+
 
 // import required modules
-import { Pagination } from 'swiper/modules';
 
 export default function PopularCat() {
   const { posts: popularPosts, loading: popularLoading, error: popularError } = usePopularCatPosts(); // ใช้ hook ใหม่
@@ -24,33 +28,31 @@ export default function PopularCat() {
   }
 
   return (
-    <div className="p-4 overflow-hidden"> {/* เพิ่ม overflow-hidden ที่นี่ */}
-  <h1 className="text-2xl font-bold mb-4">Featured Posts</h1>
-  
+    <div className="bg-pink-50">
+      <h1 className="text-2xl font-bold mb-4">Featured Posts</h1>
+      
+      <div className="bg-pink-50 py-10 px-4 rounded-xl">
+  {/* <h1 className="text-2xl font-bold text-center mb-6">Featured Posts</h1> */}
+
   <Swiper
-  slidesPerView={5} // แสดง 5 การ์ดในแต่ละหน้าจอ
-  spaceBetween={16} // ระยะห่างระหว่างสไลด์ 24px
-  loop={true} // ทำให้สไลด์วนลูปไปเรื่อย ๆ
-  autoplay={{
-    delay: 2000, // เลื่อนทุกๆ 2 วินาที
-    disableOnInteraction: false, // ให้เลื่อนต่อไปแม้จะมีการคลิก
-  }}
-  pagination={{
-    clickable: true,
-  }}
-  modules={[Pagination]} // ใช้แค่โมดูล Pagination
-  centeredSlides={true} // ทำให้สไลด์อยู่ตรงกลางในแนวนอน
-  className="mySwiper"
+  grabCursor={true}
+  centeredSlides={true}
+  slidesPerView={'auto'}
+  spaceBetween={24}
+  loop={true} // ✅ เพิ่มบรรทัดนี้
+  pagination={{ clickable: true }}
+  navigation={true}
+  modules={[Pagination, Navigation]}
+  className="mySwiper !pb-10"
 >
+
   {postsToDisplay.map((post, index) => (
-    <SwiperSlide key={index}>
-      <div className="bg-white rounded shadow-md overflow-hidden h-[424px] w-[379px]">
+    <SwiperSlide key={index} className="!w-[379px] transition-transform duration-500 ease-in-out">
+      <div className="card-wrapper bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 h-[424px] w-[379px] mx-auto">
         <img
           src={post.image}
           alt={post.caption}
-          width={379} // กำหนดขนาดความกว้างของรูปภาพให้ตรงกับขนาด card
-          height={300} // กำหนดความสูงของรูปภาพ
-          className="w-full h-[300px] object-cover" // ปรับความสูงของรูปภาพ
+          className="w-full h-[300px] object-cover"
         />
         <div className="p-2 h-[124px] overflow-y-auto">
           <div className="flex items-center gap-2">
@@ -74,9 +76,8 @@ export default function PopularCat() {
 </Swiper>
 
 
-
-
 </div>
 
+    </div>
   );
 }
