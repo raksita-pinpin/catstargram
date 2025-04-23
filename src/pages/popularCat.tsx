@@ -1,24 +1,18 @@
-
 import Image from "next/image";
-import { useCatPosts } from "./api/useCatPosts";
-import Navbar from "@/components/navbar";
+import { usePopularCatPosts } from "./api/usePopularCatPosts"; // import hook ใหม่
 import DefaultLayout from "@/layout/defaultLayout";
-import PopularCat from "./popularCat";
 
-export default function Home() {
-  const { posts, loading, error } = useCatPosts();
+export default function PopularCat() {
+  const { posts: popularPosts, loading: popularLoading, error: popularError } = usePopularCatPosts(); // ใช้ hook ใหม่
 
-  if (loading) return <p>กำลังโหลดโพสต์แมว...</p>;
-  if (error) return <p>เกิดข้อผิดพลาด: {error}</p>;
-  
+  if (popularLoading) return <p>กำลังโหลดโพสต์ยอดนิยม...</p>;
+  if (popularError) return <p>เกิดข้อผิดพลาด: {popularError}</p>;
 
   return (
-    <DefaultLayout>
-      <PopularCat/>
       <div className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Recent Posts</h1>
+        <h1 className="text-2xl font-bold mb-4">Featured Posts</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {posts.map((post) => (
+          {popularPosts.map((post) => (
             <div key={post.id} className="bg-white rounded shadow-md overflow-hidden">
               <Image
                 src={post.image}
@@ -47,6 +41,5 @@ export default function Home() {
           ))}
         </div>
       </div>
-    </DefaultLayout>
   );
 }
