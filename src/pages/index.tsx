@@ -12,7 +12,17 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      <div className="bg-pink-50 h-screen">
+      <div className="bg-pink-50 h-screen ">
+        <div className=" max-w-screen-xl mx-auto py-8">
+          <div className="bg-white min-h-[180px]">
+          <div className="flex flex-col items-start justify-center min-h-[180px]">
+            <span className="text-[36px]">Welcome to Catstagram</span>
+            <span>Share your love for cats with the world! 🐱</span>
+          </div>
+
+          </div>
+        </div>
+
         <div className="max-w-screen-xl mx-auto bg-pink-50">
           <PopularCat />
         </div>
