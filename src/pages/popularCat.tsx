@@ -1,6 +1,15 @@
-import Image from "next/image";
+import React from 'react';
 import { usePopularCatPosts } from "./api/usePopularCatPosts"; // import hook ใหม่
-import DefaultLayout from "@/layout/defaultLayout";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+// import required modules
+import { Pagination } from 'swiper/modules';
 
 export default function PopularCat() {
   const { posts: popularPosts, loading: popularLoading, error: popularError } = usePopularCatPosts(); // ใช้ hook ใหม่
@@ -9,12 +18,23 @@ export default function PopularCat() {
   if (popularError) return <p>เกิดข้อผิดพลาด: {popularError}</p>;
 
   return (
-      <div className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Featured Posts</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {popularPosts.map((post) => (
-            <div key={post.id} className="bg-white rounded shadow-md overflow-hidden">
-              <Image
+    <div className="p-50">
+      <h1 className="text-2xl font-bold mb-4">Featured Posts</h1>
+      
+      <Swiper
+        slidesPerView={2} // สามารถปรับจำนวนสไลด์ที่แสดงได้
+        spaceBetween={30}
+        loop={true} // ทำให้สไลด์วนลูปไปเรื่อย ๆ
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]} // ใช้แค่โมดูล Pagination
+        className="mySwiper"
+      >
+        {popularPosts.map((post) => (
+          <SwiperSlide key={post.id}>
+            <div className="bg-white rounded shadow-md overflow-hidden">
+              <img
                 src={post.image}
                 alt={post.caption}
                 width={500}
@@ -23,7 +43,7 @@ export default function PopularCat() {
               />
               <div className="p-2">
                 <div className="flex items-center gap-2">
-                  <Image
+                  <img
                     src={post.user.avatar}
                     alt={post.user.username}
                     width={32}
@@ -38,8 +58,9 @@ export default function PopularCat() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 }

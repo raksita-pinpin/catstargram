@@ -10,7 +10,7 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
     return (
         <div className="bg-white min-h-screen">
             <Navbar/>
-            <main className="bg-gray-100 min-h-screen text-black">
+            <main className="bg-white min-h-screen text-black w-full px-[320px]">
                 {children}
             </main>
         </div>

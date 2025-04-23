@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
   
 
   return (
-    <nav className="h-16  bg-gray-300 w-full flex items-center justify-between px-4  text-black">
+    <nav className="h-16  bg-gray-300 w-full flex items-center justify-between  text-black px-[320px]">
       {/* ฝั่งซ้าย: โลโก้ */}
       <div className="flex items-center">
         <Image 
