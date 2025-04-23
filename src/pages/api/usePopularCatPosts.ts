@@ -9,7 +9,6 @@ export function usePopularCatPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // ใช้ URL ที่ถูกต้อง
         const res = await fetch("https://catstagram.amornnan.xyz/api/public/posts/featured");
         if (!res.ok) throw new Error("Failed to fetch popular posts");
         const data = await res.json();
@@ -20,9 +19,7 @@ export function usePopularCatPosts() {
         setLoading(false);
       }
     };
-
     fetchPosts();
   }, []);
-
   return { posts, loading, error };
 }
