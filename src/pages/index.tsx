@@ -16,7 +16,7 @@ export default function Home() {
 
       <div className="p-4">
         <h1 className="text-2xl font-bold mb-4">Recent Posts</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[24px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[24px] mx-auto max-w-screen-xl">
           {posts.map((post) => (
             <div key={post.id} className="bg-white rounded shadow-md overflow-hidden w-full">
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}> {/* 16:9 aspect ratio */}
